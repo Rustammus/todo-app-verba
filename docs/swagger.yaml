@@ -1,0 +1,202 @@
+basePath: /
+definitions:
+  schemas.RequestTaskCreate:
+    properties:
+      description:
+        type: string
+      due_date:
+        type: string
+      title:
+        type: string
+    type: object
+  schemas.RequestTaskUpdate:
+    properties:
+      description:
+        type: string
+      due_date:
+        type: string
+      title:
+        type: string
+    type: object
+  schemas.ResponseTaskRead:
+    properties:
+      created_at:
+        type: string
+      description:
+        type: string
+      due_date:
+        type: string
+      id:
+        type: integer
+      title:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  v1.errorJSON:
+    properties:
+      error:
+        type: string
+    type: object
+externalDocs:
+  description: OpenAPI
+  url: https://swagger.io/resources/open-api/
+host: localhost:8082
+info:
+  contact: {}
+  description: This is my server.
+  license:
+    name: Apache helicopter
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: ToDo service
+  version: "1.0"
+paths:
+  /tasks:
+    get:
+      consumes:
+      - application/json
+      description: List Task Description
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/schemas.ResponseTaskRead'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.errorJSON'
+      summary: List Task Summary
+      tags:
+      - Task API
+    post:
+      consumes:
+      - application/json
+      description: Create Task Description
+      parameters:
+      - description: Task base
+        in: body
+        name: Task
+        schema:
+          $ref: '#/definitions/schemas.RequestTaskCreate'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/schemas.ResponseTaskRead'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/v1.errorJSON'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.errorJSON'
+      summary: Create Task Summary
+      tags:
+      - Task API
+  /tasks/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Task by id Description
+      parameters:
+      - description: Task id
+        in: path
+        name: id
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+          schema:
+            $ref: '#/definitions/schemas.ResponseTaskRead'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/v1.errorJSON'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/v1.errorJSON'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.errorJSON'
+      summary: Delete Task by id Summary
+      tags:
+      - Task API
+    get:
+      consumes:
+      - application/json
+      description: Find Task by id Description
+      parameters:
+      - description: Task id
+        in: path
+        name: id
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.ResponseTaskRead'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/v1.errorJSON'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/v1.errorJSON'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.errorJSON'
+      summary: Find Task by id Summary
+      tags:
+      - Task API
+    put:
+      consumes:
+      - application/json
+      description: Update Task Description
+      parameters:
+      - description: Task id
+        in: path
+        name: id
+        type: integer
+      - description: Task update
+        in: body
+        name: Task
+        schema:
+          $ref: '#/definitions/schemas.RequestTaskUpdate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.ResponseTaskRead'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/v1.errorJSON'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/v1.errorJSON'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.errorJSON'
+      summary: Update Task Summary
+      tags:
+      - Task API
+swagger: "2.0"

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: todo-verba-db-config
+  namespace: default
+data:
+  PGPORT: "5435"
+  POSTGRES_DB: "dev"
+  POSTGRES_USER: "user1"
+  POSTGRES_PASSWORD: "1234"

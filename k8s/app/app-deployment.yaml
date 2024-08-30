@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-verba-app-deployment
+  labels:
+    app: todo-verba-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: todo-verba-app
+  template:
+    metadata:
+      labels:
+        app: todo-verba-app
+    spec:
+      containers:
+        - name: todo-verba-app
+          image: obuhovskaia11/todoverba:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 30080
+              name: todo-app-port
+          envFrom:
+            - configMapRef:
+                name: todo-verba-app-config
+      restartPolicy: Always

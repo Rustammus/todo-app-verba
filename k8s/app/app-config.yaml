@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: todo-verba-app-config
+  namespace: default
+data:
+  APP_PORT: "30080"
+  APP_ENABLE_SWAG: "true"
+  APP_LOG_LEVEL: "debug"
+  APP_HOST: "node_external_ip"
+  POSTGRES_HOST: "todo-verba-db-service"
+  POSTGRES_PORT: "5435"
+  POSTGRES_DB: "dev"
+  POSTGRES_USER: "user1"
+  POSTGRES_PASSWORD: "1234"
+  POSTGRES_MIGRATION: "file://migration"

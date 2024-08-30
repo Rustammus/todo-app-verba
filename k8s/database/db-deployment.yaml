@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-verba-db-deployment
+  labels:
+    app: todo-verba-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-verba-db
+  template:
+    metadata:
+      labels:
+        app: todo-verba-db
+    spec:
+      containers:
+        - name: todo-verba-db
+          image: postgres:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5435
+              name: todo-db-port
+          envFrom:
+            - configMapRef:
+                name: todo-verba-db-config
+      restartPolicy: Always
